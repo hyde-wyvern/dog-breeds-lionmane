@@ -6,6 +6,7 @@ import ElementCard from './elementCard.component';
 interface ElementCardListProps {
     collection: FlattenUnion<Breed | SubBreed>[];
     displayChip: boolean;
+    route: string;
     icon?: ReactElement;
 }
 
@@ -18,9 +19,10 @@ export default function ElementCardList(props: ElementCardListProps) {
                 title={element.name}
                 alt={`${element.name} dog`}
                 displayChip={props.displayChip}
+                route={`${props.route}`}
                 chipValue={`${
                     element.subBreeds !== undefined
-                        ? element.subBreeds.length
+                        ? `Sub-breeds: ${element.subBreeds.length}`
                         : 'hello'
                 }`}
                 icon={props.icon}

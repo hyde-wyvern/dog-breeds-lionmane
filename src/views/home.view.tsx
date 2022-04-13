@@ -30,6 +30,7 @@ export default function HomeView() {
             <ElementCardList
                 collection={state}
                 displayChip={true}
+                route={''}
                 icon={<PetsIcon />}
             />
         ) : (
