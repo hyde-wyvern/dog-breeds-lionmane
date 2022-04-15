@@ -2,12 +2,14 @@ import { Stack } from '@mui/material';
 import React, { ReactElement } from 'react';
 import { Breed, SubBreed, FlattenUnion } from '../types/breed';
 import ElementCard from './elementCard.component';
+import EmptyCard from './emptyCard.component';
 
 interface ElementCardListProps {
     collection: FlattenUnion<Breed | SubBreed>[];
     displayChip: boolean;
     route: string;
     icon?: ReactElement;
+    emptyMessage?: string;
 }
 
 export default function ElementCardList(props: ElementCardListProps) {
@@ -25,7 +27,7 @@ export default function ElementCardList(props: ElementCardListProps) {
                         chipValue={`${
                             element.subBreeds !== undefined
                                 ? `Sub-breeds: ${element.subBreeds.length}`
-                                : 'hello'
+                                : 'empty'
                         }`}
                         icon={props.icon}
                     />
@@ -38,7 +40,13 @@ export default function ElementCardList(props: ElementCardListProps) {
             {cardCollection.length > 0 ? (
                 <Stack spacing={1}>{cardCollection}</Stack>
             ) : (
-                <div>Nothing to see here...</div>
+                <EmptyCard
+                    message={
+                        props.emptyMessage !== undefined
+                            ? props.emptyMessage
+                            : 'Nothing to see here'
+                    }
+                />
             )}
         </React.Fragment>
     );

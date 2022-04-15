@@ -16,6 +16,10 @@ import SubBreedModal from '../components/subBreedModal.component';
 import { Box } from '@mui/system';
 import BreedHeader from '../components/breedHeader.component';
 import { CircularProgress } from '@mui/material';
+import ScrollableContainer from '../components/scrollableContainer.component';
+import SectionHeader from '../components/sectionHeader.component';
+import PetsIcon from '@mui/icons-material/Pets';
+import { stat } from 'fs';
 
 export default function BreedView() {
     const { breed: targetBreed } = useParams<{ breed: string }>();
@@ -80,19 +84,30 @@ export default function BreedView() {
 
     const body = displayStatus ? (
         <React.Fragment>
-            <Box sx={{ marginBottom: '25px' }}>
-                <BreedHeader breed={state} />
-            </Box>
-            {state.subBreeds && (
-                <ElementCardList
-                    collection={state.subBreeds.map((subBreed: SubBreed) => ({
-                        ...subBreed,
-                        subBreeds: [],
-                    }))}
-                    displayChip={false}
-                    route={`/${state.name}?display=`}
+            <Box>
+                <BreedHeader
+                    title={state.name}
+                    imageUrl={state.images[0]}
+                    chipCount={state.subBreeds.length}
+                    displayChip={true}
                 />
-            )}
+            </Box>
+            <SectionHeader title="Sub-Breeds" icon={<PetsIcon />} />
+            <ScrollableContainer>
+                {state.subBreeds && (
+                    <ElementCardList
+                        collection={state.subBreeds.map(
+                            (subBreed: SubBreed) => ({
+                                ...subBreed,
+                                subBreeds: [],
+                            })
+                        )}
+                        displayChip={false}
+                        route={`/${state.name}?display=`}
+                        emptyMessage="There are no sub-breeds available for this breed."
+                    />
+                )}
+            </ScrollableContainer>
             {modalDisplay.target !== undefined && (
                 <SubBreedModal
                     open={modalDisplay.value}
@@ -104,5 +119,7 @@ export default function BreedView() {
         <NotFoundView />
     );
 
-    return <div>{loading ? <CircularProgress /> : body}</div>;
+    return (
+        <React.Fragment>{loading ? <CircularProgress /> : body}</React.Fragment>
+    );
 }

@@ -6,15 +6,23 @@ interface AddPayload {
     values?: Breed[];
 }
 
-interface GetSubBreedImagesPayload {
+interface AddSubBreedImagesPayload {
     targetBreed: string;
     collection: SubBreed[];
+}
+
+interface SetFavoritePayload {
+    favorite: SubBreed;
 }
 
 export const breedsSlice: Slice = createSlice({
     name: 'breeds',
     initialState: {
         breeds: [],
+        favorite:
+            localStorage.getItem('favorite') !== null
+                ? JSON.parse(localStorage.getItem('favorite'))
+                : undefined,
     },
 
     reducers: {
@@ -41,7 +49,7 @@ export const breedsSlice: Slice = createSlice({
         },
         addSubBreedImages: (
             state,
-            action: PayloadAction<GetSubBreedImagesPayload>
+            action: PayloadAction<AddSubBreedImagesPayload>
         ) => {
             const validBreed: number = state.breeds.findIndex(
                 (breed: Breed) => breed.name === action.payload.targetBreed
@@ -50,9 +58,28 @@ export const breedsSlice: Slice = createSlice({
                 state.breeds[validBreed].subBreeds = action.payload.collection;
             }
         },
+        setFavorite: (state, action: PayloadAction<SetFavoritePayload>) => {
+            if (state.favorite !== undefined) {
+                const repeated: boolean =
+                    state.favorite.name === action.payload.favorite.name;
+                if (!repeated) {
+                    state.favorite = action.payload.favorite;
+                    localStorage.setItem(
+                        'favorite',
+                        JSON.stringify(state.favorite)
+                    );
+                }
+            } else {
+                state.favorite = action.payload.favorite;
+                localStorage.setItem(
+                    'favorite',
+                    JSON.stringify(state.favorite)
+                );
+            }
+        },
     },
 });
 
-export const { add, addSubBreedImages } = breedsSlice.actions;
+export const { add, addSubBreedImages, setFavorite } = breedsSlice.actions;
 
 export default breedsSlice.reducer;

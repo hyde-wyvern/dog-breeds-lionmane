@@ -1,11 +1,13 @@
 import { Card, CardContent, Chip, Typography } from '@mui/material';
-import styled from '@mui/styled-engine-sc';
+import styled from '@emotion/styled';
 import React from 'react';
-import { Breed } from '../types/breed';
 import PetsIcon from '@mui/icons-material/Pets';
 
 interface BreedHeaderProps {
-    breed: Breed;
+    title: string;
+    imageUrl: string;
+    displayChip: boolean;
+    chipCount: number;
 }
 
 interface HeaderCardProps {
@@ -39,13 +41,15 @@ const HeaderOverlay = styled(CardContent)`
 export default function BreedHeader(props: BreedHeaderProps) {
     return (
         <React.Fragment>
-            <HeaderCard url={props.breed.images[0]}>
+            <HeaderCard url={props.imageUrl}>
                 <HeaderOverlay>
-                    <HeaderTitle>{props.breed.name.toUpperCase()}</HeaderTitle>
-                    <HeaderChip
-                        label={`Sub-breeds: ${props.breed.subBreeds.length}`}
-                        icon={<PetsIcon sx={{ fontSize: '12pt' }} />}
-                    />
+                    <HeaderTitle>{props.title.toUpperCase()}</HeaderTitle>
+                    {props.displayChip && (
+                        <HeaderChip
+                            label={`Sub-breeds: ${props.chipCount}`}
+                            icon={<PetsIcon sx={{ fontSize: '12pt' }} />}
+                        />
+                    )}
                 </HeaderOverlay>
             </HeaderCard>
         </React.Fragment>
