@@ -8,6 +8,7 @@ interface ElementCardListProps {
     collection: FlattenUnion<Breed | SubBreed>[];
     displayChip: boolean;
     route: string;
+    action: string;
     icon?: ReactElement;
     emptyMessage?: string;
 }
@@ -30,6 +31,9 @@ export default function ElementCardList(props: ElementCardListProps) {
                                 : 'empty'
                         }`}
                         icon={props.icon}
+                        actionButton={true}
+                        favorite={true}
+                        action={props.action}
                     />
                 )
             )

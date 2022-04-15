@@ -1,10 +1,11 @@
 import styled from '@emotion/styled';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
 import BreedView from './views/breed.view';
 import Home from './views/home.view';
 import NavBar from './components/navBar.component';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container } from '@mui/material';
+import {} from 'react-router-dom';
 
 const AppContainer = styled(Container)`
     display: flex;

@@ -14,12 +14,11 @@ import ElementCardList from '../components/elementCardList.component';
 import NotFoundView from './notFound.view';
 import SubBreedModal from '../components/subBreedModal.component';
 import { Box } from '@mui/system';
-import BreedHeader from '../components/breedHeader.component';
 import { CircularProgress } from '@mui/material';
 import ScrollableContainer from '../components/scrollableContainer.component';
 import SectionHeader from '../components/sectionHeader.component';
 import PetsIcon from '@mui/icons-material/Pets';
-import { stat } from 'fs';
+import ElementCard from '../components/elementCard.component';
 
 export default function BreedView() {
     const { breed: targetBreed } = useParams<{ breed: string }>();
@@ -85,11 +84,17 @@ export default function BreedView() {
     const body = displayStatus ? (
         <React.Fragment>
             <Box>
-                <BreedHeader
-                    title={state.name}
+                <ElementCard
                     imageUrl={state.images[0]}
-                    chipCount={state.subBreeds.length}
+                    title={state.name}
+                    alt={`${state.name} dog`}
                     displayChip={true}
+                    route={'/'}
+                    actionButton={false}
+                    action=""
+                    favorite={true}
+                    chipValue={`Sub-breeds: ${state.subBreeds.length}`}
+                    icon={<PetsIcon sx={{ fontSize: '12pt' }} />}
                 />
             </Box>
             <SectionHeader title="Sub-Breeds" icon={<PetsIcon />} />
@@ -105,6 +110,7 @@ export default function BreedView() {
                         displayChip={false}
                         route={`/${state.name}?display=`}
                         emptyMessage="There are no sub-breeds available for this breed."
+                        action="view gallery"
                     />
                 )}
             </ScrollableContainer>

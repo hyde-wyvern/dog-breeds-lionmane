@@ -48,6 +48,7 @@ export default function HomeView() {
                 collection={state}
                 displayChip={true}
                 route={''}
+                action="Explore"
                 icon={<PetsIcon fontSize="small" />}
             />
         ) : (
@@ -64,6 +65,9 @@ export default function HomeView() {
                     alt={`${favorite.name} dog`}
                     displayChip={false}
                     route={'/'}
+                    actionButton={false}
+                    favorite={false}
+                    action=""
                 />
             ) : (
                 <EmptyCard message="You don't have a favorite breed yet." />

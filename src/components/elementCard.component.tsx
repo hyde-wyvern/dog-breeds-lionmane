@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { SubBreed } from '../types/breed';
 import { AppDispatch, RootState } from '../app/store';
 import { useEffect, useState } from 'react';
+import { produceWithPatches } from 'immer';
 
 interface ElementCardProps {
     imageUrl: string;
@@ -25,6 +26,9 @@ interface ElementCardProps {
     alt: string;
     displayChip: boolean;
     route: string;
+    favorite: boolean;
+    actionButton: boolean;
+    action: string;
     chipValue?: string;
     icon?: React.ReactElement;
 }
@@ -78,31 +82,35 @@ export default function ElementCard(props: ElementCardProps) {
                 </CardContent>
             </Box>
             <CardActions>
-                <Button
-                    onClick={() => {
-                        navigate(`${props.route}${props.title}`, {
-                            replace: true,
-                        });
-                    }}
-                    size="small"
-                    color="primary">
-                    read more
-                </Button>
-                <IconButton
-                    aria-label="favorite"
-                    onClick={() => {
-                        dispatch(
-                            setFavorite({
-                                favorite: virtualSubBreed,
-                            })
-                        );
-                    }}>
-                    {isFavorite === true ? (
-                        <FavoriteIcon />
-                    ) : (
-                        <FavoriteBorderIcon />
-                    )}
-                </IconButton>
+                {props.actionButton && (
+                    <Button
+                        onClick={() => {
+                            navigate(`${props.route}${props.title}`, {
+                                replace: true,
+                            });
+                        }}
+                        size="small"
+                        color="primary">
+                        {props.action}
+                    </Button>
+                )}
+                {props.favorite && (
+                    <IconButton
+                        aria-label="favorite"
+                        onClick={() => {
+                            dispatch(
+                                setFavorite({
+                                    favorite: virtualSubBreed,
+                                })
+                            );
+                        }}>
+                        {isFavorite === true ? (
+                            <FavoriteIcon />
+                        ) : (
+                            <FavoriteBorderIcon />
+                        )}
+                    </IconButton>
+                )}
             </CardActions>
         </Card>
     );
