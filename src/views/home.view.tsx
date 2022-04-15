@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState, AppDispatch } from '../app/store';
 import { add } from '../features/api/breeds.slice';
@@ -14,16 +14,16 @@ export default function HomeView() {
     );
     const dispatch = useDispatch<AppDispatch>();
 
-    const breedData = async () => {
+    const breedData = useCallback(async () => {
         const data: Breed[] = await FetchAllBreeds(true);
         if (data) {
             dispatch(add({ values: data }));
         } else console.log('error');
-    };
+    }, [dispatch]);
 
     useEffect(() => {
-        breedData();
-    }, []);
+        if (state.length <= 1) breedData();
+    }, [breedData, state.length]);
 
     const body =
         state.length > 0 ? (
@@ -31,7 +31,7 @@ export default function HomeView() {
                 collection={state}
                 displayChip={true}
                 route={''}
-                icon={<PetsIcon />}
+                icon={<PetsIcon fontSize="small" />}
             />
         ) : (
             <CircularProgress />

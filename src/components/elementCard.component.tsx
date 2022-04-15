@@ -30,7 +30,7 @@ export default function ElementCard(props: ElementCardProps) {
             sx={{
                 display: 'flex',
                 justifyContent: 'space-between',
-                maxWidth: 500,
+                maxWidth: '100%',
             }}>
             <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                 <CardMedia

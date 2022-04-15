@@ -24,7 +24,7 @@ function ParseSubBreed(name: string): SubBreed {
     return { name: name, images: [] };
 }
 
-function ProvideImages(
+export function ProvideImages(
     collection: ApiElement[],
     name: string = '',
     imageCount: number = 1
