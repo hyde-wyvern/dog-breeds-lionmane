@@ -3,9 +3,9 @@ import React, { forwardRef, useState } from 'react';
 import Slide from '@mui/material/Slide';
 import { TransitionProps } from '@mui/material/transitions';
 import { SubBreed } from '../types/breed';
-import DialogHeader from './dialogueHeader.component';
 import Gallery from './gallery.component';
 import { useNavigate } from 'react-router-dom';
+import DialogHeader from './containers/dialogueHeader.component';
 
 const Transition = forwardRef(function Transition(
     props: TransitionProps & {

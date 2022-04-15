@@ -1,8 +1,8 @@
 import { Stack } from '@mui/material';
 import React, { ReactElement } from 'react';
 import { Breed, SubBreed, FlattenUnion } from '../types/breed';
-import ElementCard from './elementCard.component';
-import EmptyCard from './emptyCard.component';
+import ElementCard from './containers/elementCard.component';
+import EmptyCard from './containers/emptyCard.component';
 
 interface ElementCardListProps {
     collection: FlattenUnion<Breed | SubBreed>[];

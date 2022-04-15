@@ -8,17 +8,16 @@ import {
     Button,
     IconButton,
 } from '@mui/material';
-import { setFavorite } from '../features/api/breeds.slice';
 import BrokenImageIcon from '@mui/icons-material/BrokenImage';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Box } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { SubBreed } from '../types/breed';
-import { AppDispatch, RootState } from '../app/store';
+import { AppDispatch, RootState } from '../../app/store';
 import { useEffect, useState } from 'react';
-import { produceWithPatches } from 'immer';
+import { setFavorite } from '../../features/api/breeds.slice';
+import { SubBreed } from '../../types/breed';
 
 interface ElementCardProps {
     imageUrl: string;

@@ -7,11 +7,11 @@ import { Breed, SubBreed } from '../types/breed';
 import { CircularProgress } from '@mui/material';
 import ElementCardList from '../components/elementCardList.component';
 import PetsIcon from '@mui/icons-material/Pets';
-import EmptyCard from '../components/emptyCard.component';
-import SectionHeader from '../components/sectionHeader.component';
-import ScrollableContainer from '../components/scrollableContainer.component';
 import { useState } from 'react';
-import ElementCard from '../components/elementCard.component';
+import SectionHeader from '../components/containers/sectionHeader.component';
+import ElementCard from '../components/containers/elementCard.component';
+import EmptyCard from '../components/containers/emptyCard.component';
+import ScrollableContainer from '../components/containers/scrollableContainer.component';
 
 export default function HomeView() {
     const state: Breed[] = useSelector(

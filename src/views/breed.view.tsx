@@ -15,10 +15,10 @@ import NotFoundView from './notFound.view';
 import SubBreedModal from '../components/subBreedModal.component';
 import { Box } from '@mui/system';
 import { CircularProgress } from '@mui/material';
-import ScrollableContainer from '../components/scrollableContainer.component';
-import SectionHeader from '../components/sectionHeader.component';
 import PetsIcon from '@mui/icons-material/Pets';
-import ElementCard from '../components/elementCard.component';
+import SectionHeader from '../components/containers/sectionHeader.component';
+import ElementCard from '../components/containers/elementCard.component';
+import ScrollableContainer from '../components/containers/scrollableContainer.component';
 
 export default function BreedView() {
     const { breed: targetBreed } = useParams<{ breed: string }>();
